@@ -1,0 +1,95 @@
+{
+  "results": [
+    {
+      "name": "boot: title screen",
+      "ok": true,
+      "detail": "screen=title"
+    },
+    {
+      "name": "boot: round 1 harbour",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "boot: no console errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "start: playing",
+      "ok": true,
+      "detail": "screen=playing"
+    },
+    {
+      "name": "round 1 has 7 differences",
+      "ok": true,
+      "detail": "n=7"
+    },
+    {
+      "name": "first find: counter 1, score up",
+      "ok": true,
+      "detail": "found=1 score=150"
+    },
+    {
+      "name": "wrong click: penalty applied",
+      "ok": true,
+      "detail": "wrongs 0->1, score 150->135"
+    },
+    {
+      "name": "hint: charge used",
+      "ok": true,
+      "detail": "hints 3->2"
+    },
+    {
+      "name": "hint: costs 25 points",
+      "ok": true,
+      "detail": "score 135->110"
+    },
+    {
+      "name": "timer: counts down",
+      "ok": true,
+      "detail": "150s -> 148s"
+    },
+    {
+      "name": "round 1: all 7 found",
+      "ok": true,
+      "detail": "found=7"
+    },
+    {
+      "name": "round 1: score grew",
+      "ok": true,
+      "detail": "score=1298"
+    },
+    {
+      "name": "round 1: round-complete screen",
+      "ok": true,
+      "detail": "screen=round-complete"
+    },
+    {
+      "name": "round 2: playing night market",
+      "ok": true,
+      "detail": "screen=playing round=Night Market"
+    },
+    {
+      "name": "round 2 has 7 differences",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "round 2: 2 found, counter tracks",
+      "ok": true,
+      "detail": "found=2"
+    },
+    {
+      "name": "restart: fresh round 1, score 0",
+      "ok": true,
+      "detail": "{\"screen\":\"playing\",\"round\":1,\"roundName\":\"Harbour at Dusk\",\"found\":0,\"total\":7,\"score\":0,\"timeLeft\":150,\"hintsLeft\":3,\"wrongs\":0}"
+    },
+    {
+      "name": "final: no console errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "errors": []
+}
