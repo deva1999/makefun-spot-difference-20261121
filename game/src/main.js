@@ -28,6 +28,7 @@ class Game {
     this.hintsLeft = HINTS_PER_ROUND;
     this.lastHintAt = -99;
     this.level = LEVELS[0];
+    this.best = this.loadBest();
     this.bindDom();
     this.canvas.addEventListener('pointerdown', (e) => this.onClick(e));
     requestAnimationFrame((now) => this.frame(now));
@@ -88,6 +89,26 @@ class Game {
     }
   }
 
+  // Best score, kept in the browser so a return visit has a number
+  // to beat. Guarded: some contexts refuse localStorage entirely.
+  loadBest() {
+    try {
+      return Number(window.localStorage.getItem('spotdiff.best') || 0) || 0;
+    } catch {
+      return 0;
+    }
+  }
+
+  saveBest() {
+    if (this.score.total <= this.best) return;
+    this.best = this.score.total;
+    try {
+      window.localStorage.setItem('spotdiff.best', String(this.best));
+    } catch {
+      // No storage available: the best score just lives for this visit.
+    }
+  }
+
   // ---- screens -------------------------------------------------------
 
   setScreen(screen) {
@@ -107,7 +128,7 @@ class Game {
         Mouse or arrow keys + Enter — H asks for a hint.<br>
         Wrong clicks cost 15 points. Hints cost 25. Beat the clock.</p>
         <button class="big" data-action="start">Start hunting</button>
-        <p class="fine">21 differences in all &middot; 3 rounds &middot; best played with a mouse</p>
+        <p class="fine">21 differences in all &middot; 3 rounds &middot; best played with a mouse${this.best > 0 ? ` &middot; best score ${this.best}` : ''}</p>
       </div>`;
   }
 
@@ -127,12 +148,13 @@ class Game {
 
   showGameOver() {
     this.setScreen('game-over');
+    this.saveBest();
     this.el.overlay.innerHTML = `
       <div class="card">
         <h1>Time&rsquo;s up!</h1>
         <p class="tag">The clock ran out on ${this.level.name} with
         ${this.level.diffs.length - this.state.found.length} difference(s) still hiding.</p>
-        <p class="how">Score: <b>${this.score.total}</b> &middot; Found ${this.score.finds} of 21</p>
+        <p class="how">Score: <b>${this.score.total}</b> &middot; Found ${this.score.finds} of 21${this.best > 0 ? ` &middot; Best ${this.best}` : ''}</p>
         <button class="big" data-action="restart">Try again</button>
       </div>`;
   }
@@ -166,6 +188,7 @@ class Game {
   completeRound() {
     this.timer.pause();
     const bonus = this.score.timeBonus(this.timer.left);
+    this.saveBest();
     this.sounds.win();
     this.showRoundComplete(bonus);
   }
@@ -287,4 +310,9 @@ window.__TEST__ = {
     cursor: { x: game.cursor.x, y: game.cursor.y, visible: game.cursor.visible },
   }),
   diffs: () => game.level.diffs.map((d) => ({ id: d.id, x: d.x, y: d.y, r: d.r })),
+  commands: {
+    // Test-only: jump the clock, so the play-test can reach the
+    // game-over screen without waiting out a whole round.
+    setTime: (s) => game.timer.set(s),
+  },
 };

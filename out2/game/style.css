@@ -1,0 +1,163 @@
+/* Spot the Difference — page chrome around the canvas. The pictures
+   themselves are drawn by scenes.js; this file only lays out the HUD,
+   the stage and the overlay cards. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #14102a;
+  color: #f2ead8;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+#app {
+  width: 1240px;
+  margin: 0 auto;
+  padding: 12px 20px 20px;
+}
+
+#hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 4px;
+  font-size: 19px;
+}
+
+.hud-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+#game-title {
+  font-weight: bold;
+  font-size: 24px;
+  color: #ffd94a;
+  letter-spacing: 0.5px;
+}
+
+#round-label { color: #c9b8e8; }
+
+#counter {
+  font-weight: bold;
+  font-size: 21px;
+  background: #2b2140;
+  border: 1px solid #ffd94a;
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+#timer {
+  font-weight: bold;
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  background: #2b2140;
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+#timer.low {
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.55; } }
+
+#score { font-weight: bold; font-size: 21px; }
+
+button {
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: bold;
+  color: #14102a;
+  background: #ffd94a;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) { background: #ffe98a; }
+button:disabled { opacity: 0.45; cursor: default; }
+
+#mute-btn { background: #c9b8e8; }
+#mute-btn:hover { background: #dcd2f2; }
+
+#stage {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#game {
+  display: block;
+  width: 1200px;
+  height: 520px;
+  background: #1a1440;
+  border-radius: 10px;
+  cursor: crosshair;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 16, 42, 0.62);
+  border-radius: 10px;
+}
+
+.overlay.hidden { display: none; }
+
+.card {
+  background: #241b52;
+  border: 2px solid #ffd94a;
+  border-radius: 14px;
+  padding: 28px 40px;
+  text-align: center;
+  max-width: 560px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.card h1 {
+  margin: 0 0 10px;
+  font-size: 38px;
+  color: #ffd94a;
+}
+
+.card .tag {
+  font-size: 19px;
+  margin: 0 0 14px;
+  color: #f2ead8;
+}
+
+.card .how {
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0 0 20px;
+  color: #dcd2f2;
+}
+
+.card .fine {
+  font-size: 14px;
+  color: #a99ac9;
+  margin: 16px 0 0;
+}
+
+button.big {
+  font-size: 22px;
+  padding: 12px 30px;
+}
+
+#status {
+  text-align: center;
+  padding: 12px 0 0;
+  font-size: 17px;
+  color: #c9b8e8;
+  min-height: 24px;
+}

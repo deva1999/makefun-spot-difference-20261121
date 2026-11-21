@@ -83,7 +83,27 @@
     {
       "name": "restart: fresh round 1, score 0",
       "ok": true,
-      "detail": "{\"screen\":\"playing\",\"round\":1,\"roundName\":\"Harbour at Dusk\",\"found\":0,\"total\":7,\"score\":0,\"timeLeft\":150,\"hintsLeft\":3,\"wrongs\":0}"
+      "detail": "{\"screen\":\"playing\",\"round\":1,\"roundName\":\"Harbour at Dusk\",\"found\":0,\"total\":7,\"score\":0,\"timeLeft\":150,\"hintsLeft\":3,\"wrongs\":0,\"cursor\":{\"x\":290,\"y\":260,\"visible\":false}}"
+    },
+    {
+      "name": "keyboard: crosshair moves",
+      "ok": true,
+      "detail": "cursor (290,260) -> (314,272)"
+    },
+    {
+      "name": "keyboard: H uses a hint",
+      "ok": true,
+      "detail": "hints 3->2"
+    },
+    {
+      "name": "game over: timer expiry ends the round",
+      "ok": true,
+      "detail": "screen=game-over"
+    },
+    {
+      "name": "game over: restart plays again",
+      "ok": true,
+      "detail": "screen=playing score=0"
     },
     {
       "name": "final: no console errors",

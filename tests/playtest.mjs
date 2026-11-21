@@ -122,6 +122,16 @@ await page.keyboard.press('h');
 s = await state();
 check('keyboard: H uses a hint', s.hintsLeft === hBefore.hintsLeft - 1,
   `hints ${hBefore.hintsLeft}->${s.hintsLeft}`);
+
+// ---- game over --------------------------------------------------------
+await page.evaluate(() => window.__TEST__.commands.setTime(1));
+await page.waitForTimeout(1800);
+s = await state();
+check('game over: timer expiry ends the round', s.screen === 'game-over', `screen=${s.screen}`);
+await page.click('[data-action="restart"]');
+s = await state();
+check('game over: restart plays again', s.screen === 'playing' && s.round === 1 && s.score === 0,
+  `screen=${s.screen} score=${s.score}`);
 check('final: no console errors', errors.length === 0, errors.join(' | '));
 
 // ---- screenshots ------------------------------------------------------
